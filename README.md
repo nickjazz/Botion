@@ -1,4 +1,6 @@
-## Botion, datatable inspired by Notion
+# Botion
+
+### Data table inspired by Notion
 
 ![alt text](public/screenshot.jpg "Botion")
 

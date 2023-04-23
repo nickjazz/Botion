@@ -24,28 +24,28 @@ yarn add botion
 module.exports = {
   content: [
    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-		"./components/**/*.{js,ts,jsx,tsx,mdx}",
-		"./app/**/*.{js,ts,jsx,tsx,mdx}",
-	+	"./node_modules/botion/dist/*/**/*.{js,ts,jsx,tsx}",
+   "./components/**/*.{js,ts,jsx,tsx,mdx}",
+   "./app/**/*.{js,ts,jsx,tsx,mdx}",
+ + "./node_modules/botion/dist/*/**/*.{js,ts,jsx,tsx}",
   ],
 ```
 
 ```jsx
 export default function Page() {
-	const [active, setActive] = useState(0);
-	const [tabData, setTabData] = useState<any>(data);
+  const [active, setActive] = useState(0);
+  const [tabData, setTabData] = useState<any>(data);
 
-	const handleClick = (e) => {};
+  const handleClick = (e) => {};
 
-	return (
-		<main className='w-full max-w-4xl mx-auto py-10 bg-white min-h-screen'>
-			<Botion
-				data={tabData}
-				active={active}
-				onClick={setActive}
-				onChange={setTabData}
-				onItemClick={handleClick}
-			/>
-		</main>
-	);
+  return (
+    <main className='w-full max-w-4xl mx-auto py-10 bg-white min-h-screen'>
+      <Botion
+        data={tabData}
+        active={active}
+        onClick={setActive}
+        onChange={setTabData}
+        onItemClick={handleClick}
+      />
+    </main>
+  );
 ```

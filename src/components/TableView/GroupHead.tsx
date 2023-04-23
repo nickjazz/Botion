@@ -1,10 +1,12 @@
-import React, { useContext, PropsWithChildren } from "react";
+import React, { useContext, FC, PropsWithChildren } from "react";
 import { ReactSortable } from "react-sortablejs";
 import cx from "classnames";
 import map from "lodash/map";
 import find from "lodash/find";
 import ColHead from "./ColHead";
 import { context } from "../../data/context";
+
+const SortAble = ReactSortable as any;
 
 const GroupHead = ({ reorder, handleEndResize, setReorder }) => {
 	const { colDef, dataDef, replaceHead, replaceBody } = useContext(context);
@@ -38,7 +40,7 @@ const GroupHead = ({ reorder, handleEndResize, setReorder }) => {
 	};
 
 	return (
-		<ReactSortable
+		<SortAble
 			disabled={!reorder}
 			animation={400}
 			tag={"div"}
@@ -59,7 +61,7 @@ const GroupHead = ({ reorder, handleEndResize, setReorder }) => {
 					/>
 				);
 			})}
-		</ReactSortable>
+		</SortAble>
 	);
 };
 

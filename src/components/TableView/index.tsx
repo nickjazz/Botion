@@ -49,10 +49,11 @@ const TableView = () => {
 		const head = el.current.querySelectorAll("[data-head]");
 		const nextHeadWidth = map(head, (x) => x?.getBoundingClientRect()?.width);
 		replaceHead((prev) => {
-			const next = map(prev, (x, index) => {
+			const next = map(prev, (x) => {
 				if (x.hidden) return x;
 				else {
-					x.width = nextHeadWidth.shift();
+					const nextWidth = nextHeadWidth.shift();
+					if (nextWidth) x.width = nextWidth;
 					return x;
 				}
 			});

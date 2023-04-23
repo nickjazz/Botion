@@ -4,6 +4,7 @@ import typescript from "@rollup/plugin-typescript";
 import { terser } from "rollup-plugin-terser";
 import external from "rollup-plugin-peer-deps-external";
 import postcss from "rollup-plugin-postcss";
+import { visualizer } from "rollup-plugin-visualizer";
 import dts from "rollup-plugin-dts";
 import autoprefixer from "autoprefixer";
 
@@ -37,12 +38,13 @@ export default [
 				extract: "styles.css",
 			}),
 			terser({ compress: true }),
+			visualizer(),
 		],
 	},
-	{
-		input: "dist/esm/types/index.d.ts",
-		output: [{ file: "dist/index.d.ts", format: "esm" }],
-		external: [/\.css$/],
-		plugins: [dts()],
-	},
+	// {
+	// 	input: "dist/esm/types/index.d.ts",
+	// 	output: [{ file: "dist/index.d.ts", format: "esm" }],
+	// 	external: [/\.css$/],
+	// 	plugins: [dts()],
+	// },
 ];

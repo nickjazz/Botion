@@ -1,3 +1,3 @@
-import "./style.css";
+import "./styles.css";
 
 export { default as Botion } from "./Tab";

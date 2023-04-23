@@ -2,10 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import map from "lodash/map";
 import find from "lodash/find";
 import { Plus } from "react-feather";
-import * as ColorIcon from "react-icons/fc";
 import IconComponent from "../IconComponent";
 import { ReactSortable } from "react-sortablejs";
 import { context } from "../../data/context";
+
+const SortAble = ReactSortable as any;
 
 const ListView = () => {
 	const { replaceBody, dataDef, colDef, onRowAdd, update, onClick } =
@@ -61,7 +62,7 @@ const ListView = () => {
 
 	return (
 		<div className="relative mt-2 gap-2">
-			<ReactSortable
+			<SortAble
 				animation={400}
 				tag={"div"}
 				list={dataDef}
@@ -98,7 +99,7 @@ const ListView = () => {
 						</div>
 					);
 				})}
-			</ReactSortable>
+			</SortAble>
 			{openEdit && (
 				<div className={"relative"}>
 					<input

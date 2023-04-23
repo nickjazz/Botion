@@ -1,8 +1,9 @@
-import React, { useMemo, useEffect, useRef, useState } from "react";
+import React, { useMemo, useEffect, useRef, useState, FC } from "react";
 import map from "lodash/map";
 import get from "lodash/get";
 import { Sliders } from "react-feather";
 import cx from "classnames";
+import { TabPropTypes } from "./TabPropTypes";
 import { viewList } from "./config";
 import StringCol from "./colType/StringCol";
 import CheckBoxCol from "./colType/CheckBoxCol";
@@ -11,14 +12,14 @@ import SelectCol from "./colType/SelectCol";
 import Drawer from "../Drawer";
 import TableView from "../TableView";
 import ListView from "../ListView";
-import { initHead } from "../../data//init";
+import { initHead } from "../../data/init";
 import { Provider } from "../../data/context";
 
-const TabList = ({
-	data,
-	active,
-	onClick,
-	onItemClick,
+const TabList: FC<TabPropTypes> = ({
+	data = [],
+	active = 0,
+	onClick = (e: any) => {},
+	onItemClick = (e: any) => {},
 	onChange = (e: any) => {},
 }) => {
 	const [close, setClose] = useState(true);
@@ -126,6 +127,7 @@ const TabList = ({
 			replaceBody: setDataDef,
 			onRowAdd: handleRowAdd,
 			onClick: onItemClick,
+			minColWidth: 200,
 			colTypeList: {
 				string: StringCol,
 				date: StringCol,
@@ -155,8 +157,8 @@ const TabList = ({
 					<div className="flex gap-1">
 						{map(data, (x, index) => {
 							const isActive = active === index;
+							if (!x) return null;
 							const Icon = viewList?.[x?.type];
-
 							return (
 								<div
 									onClick={(e) => onClick(index)}

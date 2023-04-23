@@ -8,6 +8,7 @@ import { Menu } from "react-feather";
 import { ReactSortable } from "react-sortablejs";
 import * as Popover from "@radix-ui/react-popover";
 import withCol from "../../with/withCol";
+const SortAble = ReactSortable as any;
 
 const SelectCol = ({
 	data = "",
@@ -83,7 +84,7 @@ const SelectCol = ({
 								/>
 							</div>
 							<div className="overflow-scroll h-full">
-								<ReactSortable
+								<SortAble
 									animation={400}
 									tag={"div"}
 									className={cx("flex flex-col w-full h-[36px]")}
@@ -110,7 +111,7 @@ const SelectCol = ({
 											</div>
 										);
 									})}
-								</ReactSortable>
+								</SortAble>
 							</div>
 						</div>
 					</Popover.Content>

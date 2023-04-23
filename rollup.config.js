@@ -38,7 +38,7 @@ export default [
 				extract: "styles.css",
 			}),
 			terser({ compress: true }),
-			visualizer(),
+			// visualizer(),
 		],
 	},
 	// {

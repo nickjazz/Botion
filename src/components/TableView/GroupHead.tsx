@@ -9,7 +9,7 @@ import { context } from "../../data/context";
 const SortAble = ReactSortable as any;
 
 const GroupHead = ({ reorder, handleEndResize, setReorder }) => {
-	const { colDef, dataDef, replaceHead, replaceBody } = useContext(context);
+	const { colDef, replaceHead, replaceBody } = useContext(context);
 
 	if (!colDef) return null;
 	const filterHidden = colDef?.filter((x) => !x.hidden);

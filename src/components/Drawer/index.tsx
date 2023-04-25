@@ -34,9 +34,9 @@ const Drawer = ({
 	const viewType = [
 		{ label: "List", type: "list", icon: List },
 		{ label: "Table", type: "table", icon: Table },
-		{ label: "Card", type: "card", icon: CreditCard },
-		{ label: "Calendar", type: "calendar", icon: Calendar },
-		{ label: "Chart", type: "chart", icon: BarChart2 },
+		// { label: "Card", type: "card", icon: CreditCard },
+		// { label: "Calendar", type: "calendar", icon: Calendar },
+		// { label: "Chart", type: "chart", icon: BarChart2 },
 	];
 
 	return (
@@ -68,11 +68,12 @@ const Drawer = ({
 
 				{/* View */}
 				<div className="grid grid-cols-3 py-2 mt-2 gap-2">
-					{map(viewType, (x) => {
+					{map(viewType, (x, index) => {
 						const Icon = x.icon;
 						const active = x.type === data?.type;
 						return (
 							<div
+								key={`${x.label}-${index}`}
 								onClick={() => {
 									onChangeType(x?.type);
 								}}

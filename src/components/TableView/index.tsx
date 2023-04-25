@@ -27,18 +27,6 @@ const TableView = () => {
 		return () => window.removeEventListener("click", clickEvent);
 	}, [clickEvent]);
 
-	// const handleSort = (e) => {
-	// 	const keys = map(e, (x) => x?.id);
-	// 	replaceHead(e);
-	// 	replaceBody((prev) => {
-	// 		return map(prev, (x) => {
-	// 			const next = {};
-	// 			map(keys, (key) => (next[key] = x[key]));
-	// 			return next;
-	// 		});
-	// 	});
-	// };
-
 	const handleEndResize = () => {
 		setReorder(true);
 		syncWidth();

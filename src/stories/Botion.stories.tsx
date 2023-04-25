@@ -24,3 +24,21 @@ export const Basic = () => {
 		/>
 	);
 };
+
+export const EmptyData = () => {
+	const [active, setActive] = useState(0);
+	const [tabData, setTabData] = useState<any>([]);
+
+	const handleClick = (e) => {
+		console.log(e);
+	};
+	return (
+		<Botion
+			data={tabData}
+			active={active}
+			onClick={setActive}
+			onChange={setTabData}
+			onItemClick={handleClick}
+		/>
+	);
+};

@@ -1,9 +1,16 @@
 import React, { useMemo, useEffect, useRef, useState, FC } from "react";
 import map from "lodash/map";
 import get from "lodash/get";
+import isEmpty from "lodash/isEmpty";
 import { Sliders } from "react-feather";
 import cx from "classnames";
-import { TabPropTypes } from "./TabPropTypes";
+import { nanoid } from "nanoid";
+import {
+	TabPropTypes,
+	ItemPropTypes,
+	headPropTypes,
+	bodyPropTypes,
+} from "./TabPropTypes";
 import { viewList } from "./config";
 import StringCol from "./colType/StringCol";
 import CheckBoxCol from "./colType/CheckBoxCol";
@@ -12,8 +19,29 @@ import SelectCol from "./colType/SelectCol";
 import Drawer from "../Drawer";
 import TableView from "../TableView";
 import ListView from "../ListView";
-import { initHead } from "../../data/init";
 import { Provider } from "../../data/context";
+
+const initalId = nanoid();
+const inital: ItemPropTypes[] = [
+	{
+		type: "table",
+		name: "Your First List",
+		data: {
+			head: [
+				{
+					id: initalId,
+					icon: "AlignLeft",
+					data: "column",
+					type: "string",
+					width: 200,
+					wrap: true,
+					locked: true,
+				},
+			],
+			body: [{ [initalId]: "your first value" }],
+		},
+	},
+];
 
 const TabList: FC<TabPropTypes> = ({
 	data = [],
@@ -25,12 +53,17 @@ const TabList: FC<TabPropTypes> = ({
 	const [close, setClose] = useState(true);
 	const parentEl = useRef<HTMLDivElement>(null);
 
-	const [tabData, setTabData] = useState<any[]>();
-	const [colDef, setColDef] = useState<any[]>();
-	const [dataDef, setDataDef] = useState<any>();
+	const [tabData, setTabData] = useState<ItemPropTypes[]>();
+	const [colDef, setColDef] = useState<headPropTypes[]>();
+	const [dataDef, setDataDef] = useState<bodyPropTypes[]>();
 	const [editId, setEditId] = useState(null);
 
 	useEffect(() => {
+		if (isEmpty(data)) {
+			console.warn("[Botion] your data is empty.");
+			setTabData(inital);
+			return;
+		}
 		setTabData(data);
 	}, [data]);
 
@@ -50,23 +83,17 @@ const TabList: FC<TabPropTypes> = ({
 	}, [dataDef, colDef]);
 
 	useEffect(() => {
-		const initCol = initHead("name") as any;
-		const initRow = [{ [initCol?.[0]?.id]: "" }];
 		const activeTab = get(tabData || data, [active, "data"]);
-
-		setColDef(activeTab?.head?.length === 0 ? initCol : activeTab?.head);
-		setDataDef(activeTab?.body?.length === 0 ? initRow : activeTab?.body);
-	}, [active, data, tabData]);
+		setColDef(activeTab?.head);
+		setDataDef(activeTab?.body);
+	}, [active, tabData]);
 
 	const handleToggleSetting = () => setClose((prev) => !prev);
 
 	const handleTitleChange = (e) => {
 		setTabData((prev) => {
 			const next = map(prev, (x, i) => {
-				if (i === active) {
-					x.name = e?.target?.value;
-					return x;
-				}
+				if (i === active) x.name = e?.target?.value;
 				return x;
 			});
 			return next;

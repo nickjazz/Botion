@@ -6,6 +6,7 @@ export interface TabPropTypes {
 	onClick: (e: number) => void;
 	onItemClick: (e: any) => void;
 	onChange?: (e: any) => void;
+	minWidth?: number;
 }
 
 export interface PureTableTabPropTypes {

@@ -56,11 +56,11 @@ export default function Page() {
 
 ```js
 const data = [
-	{
-		type: "table", // table or list
-		name: "just a list", // display on tab
-		data: {
-			head: [
+  {
+    type: "table", // table or list
+    name: "just a list", // display on tab
+    data: {
+      head: [
         {
           id: 'a871id';
           icon: 'string'; // refer https://github.com/feathericons/react-feather
@@ -71,33 +71,33 @@ const data = [
           hidden?: boolean; // hidden in view
         }
       ],
-			body: [
+      body: [
         {
           a871id: 'summer days' // key must a match head.id
         }
       ],
-		},
-	},
-	{
-		type: "table",
-		name: "Member",
-		data: {
-			head: [],
-			body: [],
-		},
-	},
+    },
+  },
+  {
+    type: "table",
+    name: "Member",
+    data: {
+      head: [],
+      body: [],
+    },
+  },
 ];
 
 
 interface headPropTypes {
-	id: string;
-	icon: string;
-	data: string;
-	type: string;
-	width?: number;
-	wrap?: boolean;
-	locked?: boolean;
-	hidden?: boolean;
+  id: string;
+  icon: string;
+  data: string;
+  type: string;
+  width?: number;
+  wrap?: boolean;
+  locked?: boolean;
+  hidden?: boolean;
 }
 
 ```

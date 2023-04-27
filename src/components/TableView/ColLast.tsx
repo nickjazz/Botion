@@ -40,21 +40,21 @@ const ColLast = () => {
 	return (
 		<>
 			{open && (
-				<div>
+				<div className="">
 					<input
 						placeholder="type a name"
 						type={"text"}
 						autoFocus
 						onKeyDown={handleOnKeyDown}
 						onBlur={handleBlur}
-						className="ignore h-[36px] w-[120px] border-r px-4 flex cursor-pointer hover:bg-gray-100 items-center min-w-[120px] border-b-gray-200/75 text-gray-500/90 text-sm border-b"
+						className="ignore h-[36px] w-[120px] border-t border-r px-4 flex cursor-pointer hover:bg-gray-100 items-center min-w-[120px] border-b-gray-200/75 text-gray-500/90 text-sm border-b"
 					/>
 				</div>
 			)}
 			{!open && (
 				<div
 					onClick={handleOpen}
-					className="ignore flex cursor-pointer hover:bg-gray-100 items-center min-w-[120px] border-b-gray-200/75 text-gray-500/90 text-sm border-b border-r"
+					className="ignore border-t flex cursor-pointer hover:bg-gray-100 items-center min-w-[120px] border-b-gray-200/75 text-gray-500/90 text-sm border-b border-r"
 				>
 					<div className="p-3 ">
 						<Plus className="w-[14px] h-[11px] text-slate-400" />

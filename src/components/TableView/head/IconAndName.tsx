@@ -26,7 +26,7 @@ const IconAndName = ({ data }) => {
 	const handleOnBack = () => setShowIconList(false);
 
 	return (
-		<div>
+		<>
 			<div className="flex items-center gap-2">
 				<div
 					onClick={handleToggleIconList}
@@ -51,7 +51,7 @@ const IconAndName = ({ data }) => {
 					/>
 				)}
 			</div>
-		</div>
+		</>
 	);
 };
 

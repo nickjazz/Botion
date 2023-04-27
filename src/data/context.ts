@@ -18,7 +18,8 @@ export const context = createContext({
 	onRowAdd: (e: any) => {},
 	onClick: (e: any) => {},
 	colTypeList: {},
-	minColWidth: 200,
+	minColWidth: 800,
+	mode: "edit",
 });
 
 export const Provider = context.Provider;

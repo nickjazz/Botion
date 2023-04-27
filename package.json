@@ -1,6 +1,6 @@
 {
 	"name": "botion",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "Notion like data component",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",

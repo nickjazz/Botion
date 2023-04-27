@@ -4,16 +4,21 @@ import React, {
 	useRef,
 	useState,
 	useContext,
+	lazy,
+	Suspense,
 } from "react";
 import map from "lodash/map";
 import ColLast from "./ColLast";
-import GroupHead from "./GroupHead";
 import TableBody from "./TableBody";
 import { context } from "../../data/context";
 
+const GroupHead = lazy(() => import("./GroupHead"));
+const PureGroupHead = lazy(() => import("./PureGroupHead"));
+
 const TableView = () => {
 	const el = useRef<HTMLDivElement>(null);
-	const { replaceHead, updateEditId } = useContext(context);
+	const { replaceHead, updateEditId, mode } = useContext(context);
+	const isDisplay = mode === "display";
 
 	const [reorder, setReorder] = useState(true);
 
@@ -51,14 +56,23 @@ const TableView = () => {
 
 	return (
 		<div className="min-h-[600px] overflow-scroll relative">
-			<div className="h-full w-full">
+			<div className="h-full border-l min-w-max">
 				<div className="flex" ref={el}>
-					<GroupHead
-						reorder={reorder}
-						handleEndResize={handleEndResize}
-						setReorder={setReorder}
-					/>
-					<ColLast />
+					{!isDisplay && (
+						<Suspense fallback={<div>Loading...</div>}>
+							<GroupHead
+								reorder={reorder}
+								handleEndResize={handleEndResize}
+								setReorder={setReorder}
+							/>
+						</Suspense>
+					)}
+					{isDisplay && (
+						<Suspense fallback={<div>Loading...</div>}>
+							<PureGroupHead />
+						</Suspense>
+					)}
+					{!isDisplay && <ColLast />}
 				</div>
 
 				<TableBody />

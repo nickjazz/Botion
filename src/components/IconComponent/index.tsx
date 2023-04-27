@@ -4,7 +4,12 @@ import cx from "classnames";
 import * as ColorIcon from "react-icons/fc";
 import * as Popover from "@radix-ui/react-popover";
 
-const Icon = ({ name, onClick, onBack, onRemove }) => {
+const Icon = ({
+	name,
+	onClick = (e: string) => {},
+	onBack = () => {},
+	onRemove = () => {},
+}) => {
 	const El = ColorIcon?.[name];
 	return (
 		<Popover.Root>

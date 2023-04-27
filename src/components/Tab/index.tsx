@@ -2,19 +2,20 @@ import React, { useMemo, useEffect, useRef, useState, FC } from "react";
 import map from "lodash/map";
 import get from "lodash/get";
 import isEmpty from "lodash/isEmpty";
-import { Sliders } from "react-feather";
-import cx from "classnames";
 import { nanoid } from "nanoid";
+
 import {
 	TabPropTypes,
 	ItemPropTypes,
 	headPropTypes,
 	bodyPropTypes,
 } from "./TabPropTypes";
-import { viewList } from "./config";
 import StringCol from "./colType/StringCol";
 import CheckBoxCol from "./colType/CheckBoxCol";
 import SelectCol from "./colType/SelectCol";
+import DisplayCol from "./colType/DisplayCol";
+import SettingBtn from "./SettingBtn";
+import TabItems from "./TabList";
 
 import Drawer from "../Drawer";
 import TableView from "../TableView";
@@ -33,7 +34,7 @@ const inital: ItemPropTypes[] = [
 					icon: "AlignLeft",
 					data: "column",
 					type: "string",
-					width: 200,
+					width: 800,
 					wrap: true,
 					locked: true,
 				},
@@ -49,6 +50,9 @@ const TabList: FC<TabPropTypes> = ({
 	onClick = (e: any) => {},
 	onItemClick = (e: any) => {},
 	onChange = (e: any) => {},
+	setting = true,
+	mode = "edit",
+	minWidth = 800,
 }) => {
 	const [close, setClose] = useState(true);
 	const parentEl = useRef<HTMLDivElement>(null);
@@ -84,8 +88,10 @@ const TabList: FC<TabPropTypes> = ({
 
 	useEffect(() => {
 		const activeTab = get(tabData || data, [active, "data"]);
-		setColDef(activeTab?.head);
-		setDataDef(activeTab?.body);
+		const initalTab = get(inital, [0, "data"]);
+
+		setColDef(activeTab?.head?.length ? activeTab?.head : initalTab.head);
+		setDataDef(activeTab?.body?.length ? activeTab?.body : initalTab.body);
 	}, [active, tabData]);
 
 	const handleToggleSetting = () => setClose((prev) => !prev);
@@ -154,12 +160,14 @@ const TabList: FC<TabPropTypes> = ({
 			replaceBody: setDataDef,
 			onRowAdd: handleRowAdd,
 			onClick: onItemClick,
-			minColWidth: 200,
+			minColWidth: 800,
+			mode,
 			colTypeList: {
 				string: StringCol,
 				date: StringCol,
 				checkbox: CheckBoxCol,
 				select: SelectCol,
+				display: DisplayCol,
 			},
 		}),
 		[colDef, dataDef, editId]
@@ -173,43 +181,19 @@ const TabList: FC<TabPropTypes> = ({
 	};
 
 	const DisplayView = pageviewList?.[viewIs];
+	const isDisplay = mode === "display";
+	const showSetting = isDisplay ? false : setting;
 
 	return (
 		<Provider value={value}>
-			<div className=" relative">
+			<div className="relative max-w-fit" style={{ minWidth }}>
 				<div
-					className="flex justify-between gap-1 whitespace-nowrap overflow-scroll border-b border-b-gray-200 relative"
+					className="flex justify-between gap-1 whitespace-nowrap overflow-scroll relative"
 					ref={parentEl}
 				>
-					<div className="flex gap-1">
-						{map(data, (x, index) => {
-							const isActive = active === index;
-							if (!x) return null;
-							const Icon = viewList?.[x?.type];
-							return (
-								<div
-									onClick={(e) => onClick(index)}
-									key={index}
-									className={cx(
-										"px-3 font-medium py-1 mb-1.5 rounded-sm cursor-pointer text-sm hover:bg-slate-100",
-										"flex gap-2 justify-center items-center",
-										{ "text-gray-400": !isActive },
-										{ "text-slate-600 bg-slate-200": isActive }
-									)}
-								>
-									{Icon}
-									<div>{x.name}</div>
-								</div>
-							);
-						})}
-					</div>
+					<TabItems data={data} active={active} onClick={onClick} />
 
-					<div
-						onClick={handleToggleSetting}
-						className="flex items-center sticky right-0 bg-white pl-2 select-none"
-					>
-						<Sliders className="w-6 h-6 text-gray-500 cursor-pointer hover:bg-slate-100 p-1 rounded-sm" />
-					</div>
+					{showSetting && <SettingBtn onClick={handleToggleSetting} />}
 				</div>
 
 				<Drawer

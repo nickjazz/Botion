@@ -1,14 +1,14 @@
 const initValue = [
 	{
 		aaaa: "fafsfasf",
-		bbbb: "ahahahfa",
+		bbbb: "Mon",
 		cccc: false,
 		dddd: "good song",
 		eeee: "what happen",
 	},
 	{
 		aaaa: "hello",
-		bbbb: "world",
+		bbbb: "Mon",
 		cccc: true,
 		dddd: "this is a test",
 		eeee: "12345",
@@ -43,14 +43,14 @@ const initValue = [
 	},
 	{
 		aaaa: "pizza",
-		bbbb: "pasta",
+		bbbb: "Wed",
 		cccc: true,
 		dddd: "salad",
 		eeee: "bread",
 	},
 	{
 		aaaa: "dog",
-		bbbb: "cat",
+		bbbb: "Wed",
 		cccc: true,
 		dddd: "bird",
 		eeee: "fish",
@@ -91,7 +91,8 @@ const initData = [
 		id: "bbbb",
 		icon: "AlignCenter",
 		data: "column",
-		type: "string",
+		type: "select",
+		options: [...mockOptions],
 		width: 300,
 		wrap: false,
 		locked: false,
@@ -159,4 +160,4 @@ const data = [
 	},
 ];
 
-export { data };
+export { data, initValue };

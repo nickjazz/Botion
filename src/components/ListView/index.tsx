@@ -72,7 +72,7 @@ const ListView = () => {
 				{map(dataDef, (x, index) => {
 					return (
 						<div
-							className="relative min-h-[30px] flex gap-2 mb-1 rounded-sm hover:bg-gray-100 py-1 "
+							className="relative min-h-[30px] pr-3 flex gap-2 mb-1 rounded-sm hover:bg-gray-100 py-1 "
 							key={index}
 							onClick={() => onClick(x)}
 						>
@@ -81,7 +81,7 @@ const ListView = () => {
 								return (
 									<div
 										key={`${x.id}-${key}`}
-										className="first:text-[15px] last:pr-3 hover:text-gray-700 cursor-pointer whitespace-nowrap text-ellipsis overflow-clip first:pl-8 text-sm text-gray-400/80 first:text-gray-500 first:flex-1"
+										className="first:text-[15px] hover:text-gray-700 cursor-pointer whitespace-nowrap text-ellipsis overflow-clip first:pl-8 text-sm text-gray-400/80 first:text-gray-500 first:flex-1"
 									>
 										{item}
 									</div>

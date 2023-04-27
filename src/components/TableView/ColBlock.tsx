@@ -11,15 +11,17 @@ const ColBlock = ({
 	keyIndex,
 	colType = "string",
 	parentKey,
-	popupRender = () => <></>,
 	onClick,
 	active,
 }) => {
-	const { colTypeList } = useContext(context);
+	const { colTypeList, mode } = useContext(context);
 	const displayData = isObject(data) ? "" : data;
 	const isActive = active === id;
+	const isDisplay = mode === "display";
 
-	const RenderColType = colTypeList?.[colType] || colTypeList?.["string"];
+	const RenderColType = isDisplay
+		? colTypeList?.["display"]
+		: colTypeList?.[colType] || colTypeList?.["string"];
 
 	const colProps = {
 		data: displayData,

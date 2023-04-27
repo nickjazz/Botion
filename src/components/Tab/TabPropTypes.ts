@@ -1,9 +1,15 @@
 export interface TabPropTypes {
 	data: any[];
 	active: number;
+	setting?: boolean;
+	mode?: "edit" | "display";
 	onClick: (e: number) => void;
 	onItemClick: (e: any) => void;
 	onChange?: (e: any) => void;
+}
+
+export interface PureTableTabPropTypes {
+	data: any[];
 }
 export interface headPropTypes {
 	id: string;

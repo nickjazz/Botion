@@ -1,4 +1,4 @@
-import React, { useContext, FC, PropsWithChildren } from "react";
+import React, { useContext } from "react";
 import { ReactSortable } from "react-sortablejs";
 import cx from "classnames";
 import map from "lodash/map";
@@ -12,6 +12,7 @@ const GroupHead = ({ reorder, handleEndResize, setReorder }) => {
 	const { colDef, replaceHead, replaceBody } = useContext(context);
 
 	if (!colDef) return null;
+
 	const filterHidden = colDef?.filter((x) => !x.hidden);
 
 	const handleSort = (e) => {
@@ -44,7 +45,7 @@ const GroupHead = ({ reorder, handleEndResize, setReorder }) => {
 			disabled={!reorder}
 			animation={400}
 			tag={"div"}
-			className={cx("flex flex-nowrap w-fit h-[36px]")}
+			className={cx("flex flex-nowrap w-fit h-[36px] border-t")}
 			list={filterHidden}
 			setList={handleSort}
 			filter=".ignore"
